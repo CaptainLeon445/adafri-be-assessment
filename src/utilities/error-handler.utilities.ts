@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import { AppError } from '../middlewares/error_handlers/app-error';
 import { ERROR } from '../constants/errors.constants';
+import { StatusCodes } from 'http-status-codes';
 
 export class ErrorHandler {
   public static prodErrorHandler(err: any, res: Response) {
@@ -44,6 +45,16 @@ export class ErrorHandler {
   public static async handleFoError(err: any) {
     const error: string = err.message;
     return new AppError(error, 400);
+  }
+
+  public static async handleCelebrateError(err){
+    let message;
+    if (err.details.get('params')) {
+      message = err.details
+        .get('params')
+        ?.details[0].message.replace(/"+/g, '');
+    }
+    return new AppError(message, StatusCodes.BAD_REQUEST)
   }
 
   public static async handleTokenExpiredError() {

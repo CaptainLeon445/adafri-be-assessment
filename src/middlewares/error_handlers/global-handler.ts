@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import * as Sentry from '@sentry/node';
 import { AppError } from './app-error';
 import { ErrorHandler } from '../../utilities/error-handler.utilities';
 import { ERROR } from '../../constants/errors.constants';
 import logger from '../../utilities/logger';
+import { isCelebrateError } from 'celebrate';
+
 export class GlobalErrorHandler {
   static async handleError(
     err: Error,
@@ -17,7 +18,7 @@ export class GlobalErrorHandler {
     appError.statusCode = appError.statusCode || 500;
     appError.message = appError.message || ERROR.serverError[0];
     let error: any = { ...appError };
-
+    if (isCelebrateError(error)) error=ErrorHandler.handleCelebrateError(error)
     if (appError.statusCode === 500) error = ErrorHandler.handleInternalServerError();
     if (appError.name === 'SequelizeValidationError')
       error = ErrorHandler.handleValidationError(error);
@@ -28,7 +29,6 @@ export class GlobalErrorHandler {
     if (appError.name === 'TokenExpiredError') error = ErrorHandler.handleTokenExpiredError();
 
     error = { ...error, stack };
-
     if (!res.headersSent) {
       ErrorHandler.devErrorHandler(error, res);
     }
@@ -49,14 +49,12 @@ export class GlobalErrorHandler {
         // await Logs.create(logDetails);
         logger.error(logDetails);
       } catch (logError) {
-        Sentry.captureException(logError);
+        logger.error(logError)
       }
     });
-
-    Sentry.captureException(error.stack);
   }
 }
 
-export const getErrorMessage = (next: NextFunction, error: [string, number]) => {
-  return next(new AppError(error[0], error[1]));
+export const getErrorMessage = (next: NextFunction, message:string, statusCode:number) => {
+  return next(new AppError(message, statusCode));
 };

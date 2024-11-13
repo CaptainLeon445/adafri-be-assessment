@@ -1,33 +1,20 @@
 import { Application, Request, Response } from 'express';
-import RequestIP from 'request-ip';
-import { format } from 'date-fns';
 import logger from '../utilities/logger';
 import {
   captureAppDetails,
 } from '../middlewares/utils/utils.middleware';
-import { currentTimestamp } from '../utilities/global.utilities';
+import campaignRoutes from './campaign.routes';
+import { API_VERSION } from '../constants/values.constants';
 
 export const indexRoutes = (app: Application) => {
   app.use(captureAppDetails);
-
-  app.use('/api/v1/health', (req, res) => {
-    const zonedDate = currentTimestamp(req);
-    // Format the time in the desired format
-    const fUserTime = format(zonedDate, 'yyyy-MM-dd HH:mm:ssXXX');
-    const deviceDetails = {
-      forwarded: req.header('x-forwarded-for'),
-      forwarded1: req.headers['x-forwarded-for'],
-      forwarded2: req.ips[0],
-      forwarded3: req.ip,
-      module: RequestIP.getClientIp(req),
-      device: req.headers['user-agent'],
-      fUserTime,
-      zonedDate,
-    };
+  app.use(API_VERSION + '/campaigns', campaignRoutes)
+  app.use(API_VERSION + '/health', (req:Request, res:Response) => {
+    const data=res.locals
     return res.status(200).json({
       status: 'successs',
-      message: 'auth application running successfully',
-      data: deviceDetails,
+      message: 'adafri campaign application running successfully',
+      data,
     });
   });
   app.all('*', (req: Request, res: Response) => {

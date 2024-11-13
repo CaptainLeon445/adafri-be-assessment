@@ -18,7 +18,7 @@ import xss from 'xss';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import compression from 'compression';
-import { RateLimiterController } from './middlewares/rate_limiter/rate-limiter.middleware';
+// import { RateLimiterController } from './middlewares/rate_limiter/rate-limiter.middleware';
 import { GlobalErrorHandler } from './middlewares/error_handlers/global-handler';
 import { indexRoutes } from './routes/index.routes';
 import { isProductionEnv, isTestENV } from './utilities/guards';
@@ -31,10 +31,10 @@ console.log('==========================================');
 
 app.use(helmet());
 
-if (isProductionEnv) {
-  const rateLimitedController = new RateLimiterController(app);
-  rateLimitedController.setupRateLimit();
-}
+// if (isProductionEnv) {
+//   const rateLimitedController = new RateLimiterController(app);
+//   rateLimitedController.setupRateLimit();
+// }
 
 app.use(express.json());
 
@@ -50,8 +50,6 @@ app.use(hpp());
 app.use(compression());
 
 app.disable('x-powered-by');
-
-app.set('trust proxy', !isTestENV);
 
 app.use(morgan('dev'));
 

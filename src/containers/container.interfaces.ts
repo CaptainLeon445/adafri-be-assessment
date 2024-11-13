@@ -1,17 +1,7 @@
-import { AuthController } from '../controllers/auth.controllers';
-import LoginActivitiesControllers from '../controllers/login-activities.controllers';
-import UserControllers from '../controllers/user.controllers';
-import { AuthMiddleware } from '../middlewares/auth/auth.middleware';
-import { AuthService } from '../services/auth/auth.services';
-import LoginActivitiesServices from '../services/user/login-activities.services';
-import UserServices from '../services/user/user.services';
+import CampaignController from '../controllers/campaign';
+import CampaignService from '../services/campaign';
 
 export interface ContainerInstanceTypes {
-  userServices: UserServices;
-  AuthService: AuthService;
-  loginActivitiesServices: LoginActivitiesServices;
-  authController: AuthController;
-  userController: UserControllers;
-  authMiddleware: AuthMiddleware;
-  loginActivitiesControllers: LoginActivitiesControllers;
+  campaignController: CampaignController;
+  campaignService: CampaignService
 }
