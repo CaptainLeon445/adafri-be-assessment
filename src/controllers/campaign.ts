@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../utilities/catch-async-error";
-import Campaign from "../models/campaign";
-import { getMetrics } from "../api/twitter";
 import CampaignService from "../services/campaign";
 import { sendResponse } from "../utilities/responses.utilities";
 import { PaginationObject, ResponseObject } from "../types";
 import { StatusCodes } from "http-status-codes";
 import { pagination } from "../utilities/global.utilities";
+import { CampaignMessages } from "../constants/responses.constants";
 
 
 export default class CampaignController {
@@ -14,14 +13,14 @@ export default class CampaignController {
     public getCampaigns = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const paginate:PaginationObject=pagination(req)
         const data = await this.campaignService.getCampaigns(paginate)
-        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: "campaigns returned successfully", data}
+        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: CampaignMessages.CAMPAIGNS, data}
         return sendResponse(res, responseData)
     });
 
     public createCampaign = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const requestPayload = req.body
         const data = await this.campaignService.createCampaign(requestPayload)
-        const responseData:ResponseObject={statusCode:StatusCodes.CREATED, message: "campaign created successfully", data}
+        const responseData:ResponseObject={statusCode:StatusCodes.CREATED, message: CampaignMessages.CAMPAIGN_CREATED, data}
         return sendResponse(res, responseData)
     });
 
@@ -29,7 +28,7 @@ export default class CampaignController {
         const campaignId = req.params.id
         const data = await this.campaignService.getCampaignDetails(campaignId, next)
         if(!data)return
-        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: "campaign details returned successfully", data}
+        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: CampaignMessages.CAMPAIGN_DETAILS, data}
         return sendResponse(res, responseData)
     });
 
@@ -37,7 +36,7 @@ export default class CampaignController {
         const campaignId: string = req.params.id as unknown as string
         const data = await this.campaignService.getCampaignMetrics(campaignId, next)
         if(!data)return
-        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: "campaign metrics returned successfully", data}
+        const responseData:ResponseObject={statusCode:StatusCodes.OK, message: CampaignMessages.CAMPAIGN_METRICS, data}
         return sendResponse(res, responseData)
     });
 

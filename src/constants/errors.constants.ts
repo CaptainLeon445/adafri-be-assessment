@@ -1,5 +1,3 @@
-import StatusCode from 'http-status-codes';
-
-export const ERROR: Record<string, [string, number]> = {
- 
+export const CampaignErrors: Record<string, string> = {
+  NOT_FOUND: 'Campaign not found'
 };
