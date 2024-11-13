@@ -1,0 +1,22 @@
+name: Docker Image CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  
+
+jobs:
+
+  build:
+
+    runs-on: ["self-hosted","main"]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+      
+    - name: Build all files and deploy
+      run: |
+        make build-all-image && docker stack deploy -c ./deployment/compose/docker-compose.production.yml digit-tally-app-backend
+      

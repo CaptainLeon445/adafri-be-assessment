@@ -1,0 +1,62 @@
+export const AUTH_MESSAGES: Record<string, string> = {
+  userCreated: 'User created successfully',
+  otpVerified: 'OTP verified successfully',
+  otpSent: 'OTP sent successfully',
+  loggedIn: 'User logged in successfully',
+  googleAuth: 'Account authenticated successfully',
+  forgotPassword: 'Check your inbox or spam folder',
+  passwordChanged: 'Your password has been changed successfully',
+  adminCreateAccount: '<ADMIN> successfully created account for <EMAIL>',
+};
+
+export const LOGIN_DEVICE_MESSAGES: Record<string, string> = {
+  logins: 'Logged in devices returned successfully',
+  removeDevice: 'Device removed successfully',
+  otherDevices: 'Other devices removed successfully',
+  allDevices: 'All devices removed successfully',
+};
+
+export const USER_MESSAGES: Record<string, string> = {
+  created: 'Account created successfully',
+  getUsers: 'Users returned successfully',
+  getTeams: 'Teams returned successfully',
+  verifyPassword: 'Password verified successfully',
+  getUser: 'Account returned successfully',
+  updateUser: 'Account profile has been updated successfully',
+  updateTeamRole: 'Team role has been updated successfully',
+  updateBusiness: 'Account business details has been updated successfully',
+  deleteUser: 'Account deleted successfully',
+  logout: 'Logout successful',
+  deactivatedUser: 'Account deactivated successfully',
+  activatedUser: 'Account activated successfully',
+  activateUser: 'Account activation code sent to your email address successfully',
+  googleAuthCred: 'Google Authenticator app credentials returned successfully',
+  enable2FA: '2FA enabled successfully',
+  disable2FA: '2FA disabled successfully',
+  verify2FA: '2FA authenticated successfully',
+  backupPassword: 'Backup password created successfully',
+  viewBackupPasswordHint: 'Backup password hint returned successfully',
+  verifyBackupPassword: 'Backup password verified successfully',
+};
+
+export const NOTIFICATION_MESSAGES: Record<string, string> = {
+  getNotifications: 'Notifications returned successfully',
+  createNotification: 'Notification created successfully',
+  markNotificationRead: 'Notification marked read successfully',
+  markAllNotificationRead: 'All notifications marked read successfully',
+  createInvoice: 'An invoice has been successfully created for CUSTOMER_NAME',
+  createReceipt: 'A receipt has been successfully created for CUSTOMER_NAME',
+  createCreditNote: 'A credit note has been successfully created for CUSTOMER_NAME',
+  sendDocument: 'DOCUMENT_TYPE has been sent to CUSTOMER_EMAIL_ADDRESS successfully.',
+  adminCreateInvoice: '<ADMIN> successfully created invoice for <EMAIL>',
+  adminCreateReceipt: '<AMIN> successfully created receipt for <EMAIL>',
+  adminCreateCreditNote: '<ADMIN> successfully created credit Note for <EMAIL>',
+  adminUpdateDocument: '<ADMIN> successfully updated document for <EMAIL>',
+  adminDeleteDocument: '<ADMIN> successfully deleted Document for <EMAIL>',
+  adminSendDocument: '<ADMIN> successfully sent Document to <EMAIL>',
+  adminSendReminder: '<ADMIN> successfully sent reminder to <EMAIL>',
+  adminArchiveDocument: '<ADMIN> successfully archived document for <EMAIL>',
+  adminUnarchivedDocument: '<ADMIN> successfully unarchived document for <EMAIL>',
+  adminChangeTeamRole: '<ADMIN> successfully chnaged role for <EMAIL>',
+  adminRemoveDevice: '<ADMIN> successfully removed <USER> device',
+};
