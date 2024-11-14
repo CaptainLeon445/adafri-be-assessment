@@ -20,16 +20,19 @@ A comprehensive documentation for building server-side application for Adafri ba
 
 ## Introduction
 
-This project implements a basic wallet service for a mobile lending app using NodeJS, TypeScript, and PostgreSQL.
+This project implements a basic crud techniques for creating campaign using NodeJS, TypeScript, and PostgreSQL.
 This documentation provides the guidelines in cloning the repository and running the codes on your local machine.
 
 ## Features
 
-- Create an account
-- Funding account
-- Transferring funds between accounts
-- Withdraw funds from account
-- Prevent users in the Lendsqr Adjutor Karma blacklist from onboarding (the blacklist is not found)
+- Create access keys
+- get access keys
+- reset access keys (rate limits enforced)
+- create campaign
+- edit campaign
+- get campaign details
+- get campaign metrics
+- delete campaign
 
 ## Technologies
 
