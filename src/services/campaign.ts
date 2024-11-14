@@ -50,7 +50,6 @@ export default class CampaignService {
             }
             return campaign
         } catch (error) {
-            console.log("er", error.message)
             return getErrorMessage(next, "An error occurred", StatusCodes.INTERNAL_SERVER_ERROR)
         }
     });
