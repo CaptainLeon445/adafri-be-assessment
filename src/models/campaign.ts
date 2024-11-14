@@ -4,6 +4,7 @@ import { CampaignStatus } from './enums';
 
 export interface CampaignAttributes {
     id?: string;
+    campaignId?: string;
     title: string;
     budget: number;
     startDate: Date;
@@ -15,6 +16,7 @@ export interface CampaignAttributes {
 
 class Campaign extends Model<CampaignAttributes> implements CampaignAttributes {
     public id!: string;
+    public campaignId!: string;
     public title!: string;
     public budget!: number;
     public startDate!: Date;
@@ -32,6 +34,10 @@ Campaign.init(
             autoIncrement: true,
             unique: true,
             primaryKey: true,
+        },
+        campaignId: {
+            type: DataTypes.STRING,
+            unique: true,
         },
         title: {
             type: DataTypes.STRING,

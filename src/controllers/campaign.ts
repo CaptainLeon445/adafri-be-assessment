@@ -14,7 +14,8 @@ export default class CampaignController {
     constructor(private readonly campaignService: CampaignService) { }
     public getCampaigns = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const paginate: PaginationObject = pagination(req)
-        const data = await this.campaignService.getCampaigns(paginate)
+        const data = await this.campaignService.getCampaigns(paginate, next)
+        if(!data)return
         const responseData: ResponseObject = { statusCode: StatusCodes.OK, message: CampaignMessages.CAMPAIGNS, data }
         const apiRes = await getCampaigns()
         if (!apiRes) responseData.meta = CampaignErrors.AD_PERMISSION_ERROR
@@ -23,7 +24,28 @@ export default class CampaignController {
 
     public createCampaign = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const requestPayload = req.body
-        const data = await this.campaignService.createCampaign(requestPayload)
+        let meta: string|Record<string, any>=''
+        const apiRes = await createCampaign(requestPayload)
+        const data = await this.campaignService.createCampaign(requestPayload, next)
+        if(!data)return
+        if (!apiRes){
+            meta = CampaignErrors.AD_PERMISSION_ERROR
+            data.campaignId=data.id
+        }
+        if(apiRes){
+            data.campaignId=apiRes.id
+        }
+        await data.save()
+        delete data.id
+        const responseData: ResponseObject = { statusCode: StatusCodes.CREATED, message: CampaignMessages.CAMPAIGN_CREATED, data }
+        return sendResponse(res, responseData)
+    });
+
+    public updateCampaign = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+        const campaignId = req.params.id
+        const requestPayload = req.body
+        const data = await this.campaignService.updateCampaign(campaignId, requestPayload, next)
+        if (!data) return
         const responseData: ResponseObject = { statusCode: StatusCodes.CREATED, message: CampaignMessages.CAMPAIGN_CREATED, data }
         const apiRes = await createCampaign(requestPayload)
         if (!apiRes) responseData.meta = CampaignErrors.AD_PERMISSION_ERROR
