@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
     "build": "tsc",
     "build:dev": "tsc && npm run sentrydv:sourcemaps && npm run sentrydv:sourcemaps",
     "dev": "cross-env NODE_ENV=test concurrently \"npx tsc --watch\" \"npx tsc --watch\"  \"npx nodemon dist/server.js\"",

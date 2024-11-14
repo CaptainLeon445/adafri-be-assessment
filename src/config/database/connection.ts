@@ -8,8 +8,8 @@ let databaseUrl: string;
 if (env === 'test')
   databaseUrl = `postgresql://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.name}`;
 else
-  databaseUrl = `postgres://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}:${dbConfig.port}/${dbConfig.name}?ssl=true`;
-
+  databaseUrl = `postgres://${dbConfig.user}:${dbConfig.password}@${dbConfig.host}.oregon-postgres.render.com:${dbConfig.port}/${dbConfig.name}?ssl=true`;
+ 
 const sequelize = new Sequelize(databaseUrl, sequelizeConfigOptions);
 sequelize
   .authenticate()
