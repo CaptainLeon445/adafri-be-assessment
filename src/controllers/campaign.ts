@@ -6,7 +6,7 @@ import { PaginationObject, ResponseObject } from "../types";
 import { StatusCodes } from "http-status-codes";
 import { pagination } from "../utilities/global.utilities";
 import { CampaignMessages } from "../constants/responses.constants";
-import { createCampaign, getCampaignInsights, getCampaigns } from "../api/facebook";
+import { createCampaign, deleteCampaign, getCampaignInsights, getCampaigns } from "../api/facebook";
 import { CampaignErrors } from "../constants/errors.constants";
 
 
@@ -52,7 +52,12 @@ export default class CampaignController {
         const campaignId = req.params.id
         const data = await this.campaignService.deleteCampaign(campaignId, next)
         if (!data) return
-        const responseData: ResponseObject = { statusCode: StatusCodes.NO_CONTENT }
+        const responseData: ResponseObject = { statusCode: StatusCodes.OK }
+        const apiRes = await deleteCampaign(campaignId)
+        if (!apiRes) {
+            responseData.message = CampaignMessages.CAMPAIGN_DELETED
+            responseData.meta = CampaignErrors.AD_PERMISSION_ERROR
+        }
         return sendResponse(res, responseData)
     });
 }

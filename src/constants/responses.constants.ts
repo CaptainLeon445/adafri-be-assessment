@@ -3,6 +3,7 @@ export const CampaignMessages: Record<string, string> = {
   CAMPAIGNS: 'Campaigns returned successfully',
   CAMPAIGN_DETAILS: 'Campaign details returned successfully',
   CAMPAIGN_METRICS: 'Campaign metrics returned successfully',
-  CAMPAIGN_UPDATED: 'Campaign updated successfully'
+  CAMPAIGN_UPDATED: 'Campaign updated successfully',
+  CAMPAIGN_DELETED: 'Campaign deleted from the database successfully'
 };
 
