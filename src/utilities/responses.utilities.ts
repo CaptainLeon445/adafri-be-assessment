@@ -7,17 +7,17 @@ export const responseData = (statusCode: number, message: string, data?: Record<
     statusCode, message, data
   }
 }
-export const sendResponse = async (res: Response, data: ResponseObject) => {
+export const sendResponse = async (res: Response, obj: ResponseObject) => {
   const { logResponse } = res.locals;
+  const {statusCode, ...data}=obj
   const logDetails = {
     ...logResponse,
     response: {
-      ...data.data,
+      ...obj,
     },
   };
-  console.log(logDetails)
   await Logs.create(logDetails);
-  let status: string = data.statusCode >= 200 && data.statusCode < 400 ? 'success' : 'fail'
-  if (data.statusCode === 204) res.status(204).send();
-  else res.status(data.statusCode).json({ status, message: data.message, data })
+  let status: string = statusCode >= 200 && statusCode < 400 ? 'success' : 'fail'
+  if (statusCode === 204) res.status(204).send();
+  else res.status(statusCode).json({ status, ...data })
 }

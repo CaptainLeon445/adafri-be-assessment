@@ -3,6 +3,7 @@ import logger from "../../utilities/logger";
 import { AppError } from "../error_handlers/app-error";
 import Joi from "joi";
 import { celebrate, Segments } from "celebrate";
+import { CampaignStatus } from "../../models/enums";
 
 
 export const createCampaignValidator = (req: Request, res: Response, next: NextFunction) => {
@@ -13,6 +14,9 @@ export const createCampaignValidator = (req: Request, res: Response, next: NextF
                 'string.base': 'Campaign title must be a string',
                 'any.required': 'Campaign title is required',
             }),
+            status: Joi.string()
+            .valid(...Object.values(CampaignStatus))
+            .required(), 
             budget: Joi.number().min(0.0).precision(2).required().messages({
                 'number.base': 'Campaign budget must be a number.',
                 'number.min': 'Campaign budget must be greater than or equal to 0.0.',
@@ -26,7 +30,7 @@ export const createCampaignValidator = (req: Request, res: Response, next: NextF
             endDate: Joi.date().optional().messages({
                 'date.base': 'campaign end date must be a date',
                 'any.required': 'campaign end date is required',
-            }),
+            }), 
         });
     const { error } = schema.validate(req.body);
     if (error) {

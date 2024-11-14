@@ -37,7 +37,7 @@ export default class CampaignService {
         } catch (error) {
 
         }
-    });
+    }); 
 
     public getCampaignMetrics = (async (campaignId: string, next: NextFunction) => {
         try {

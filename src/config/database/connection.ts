@@ -22,7 +22,7 @@ sequelize
   });
 
   sequelize
-  .sync({ alter: true })
+  .sync({ force: true })
   .then(() => {
     console.log('Models synchronized successfully');
   })
