@@ -37,7 +37,7 @@ export class ErrorHandler {
     return new AppError(error, 400);
   }
   public static handleInternalServerError() {
-    return new AppError("An unknown error occured", StatusCodes.INTERNAL_SERVER_ERROR);
+    return new AppError('An unknown error occured', StatusCodes.INTERNAL_SERVER_ERROR);
   }
 
   public static async handleFoError(err: any) {
@@ -45,14 +45,12 @@ export class ErrorHandler {
     return new AppError(error, 400);
   }
 
-  public static async handleCelebrateError(err){
+  public static async handleCelebrateError(err) {
     let message;
     if (err.details.get('params')) {
-      message = err.details
-        .get('params')
-        ?.details[0].message.replace(/"+/g, '');
+      message = err.details.get('params')?.details[0].message.replace(/"+/g, '');
     }
-    return new AppError(message, StatusCodes.BAD_REQUEST)
+    return new AppError(message, StatusCodes.BAD_REQUEST);
   }
 
   public static async handleTokenExpiredError() {

@@ -9,11 +9,9 @@ export class RateLimiterController {
     message: 'Too many requests to reset access key, please try again later',
   });
 
-
-
   constructor(private app: express.Application) {}
 
   public setupRateLimit() {
-  this.app.use(API_VERSION +'/access/reset', this.resetAccesskeyLimiter);
+    this.app.use(API_VERSION + '/access/reset', this.resetAccesskeyLimiter);
   }
 }

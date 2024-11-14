@@ -1,5 +1,1 @@
-export type ContainerKeys =
-  | 'campaignController'
-  | 'campaignService'
-  | 'accessKeyController'
-
+export type ContainerKeys = 'campaignController' | 'campaignService' | 'accessKeyController';

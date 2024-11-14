@@ -5,4 +5,3 @@ export const isTestENV = process.env.NODE_ENV === 'test';
 export const isValuePresent = (value: any): boolean => {
   return value !== '' && value !== null && value !== undefined;
 };
-

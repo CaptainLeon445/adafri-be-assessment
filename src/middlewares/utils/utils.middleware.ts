@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import os from 'os';
-import { currentTimestamp, getPublicAddress, getUserAgentHeader } from '../../utilities/global.utilities';
+import {
+  currentTimestamp,
+  getPublicAddress,
+  getUserAgentHeader,
+} from '../../utilities/global.utilities';
 import { format } from 'date-fns';
 import geoip from 'geoip-lite';
 
@@ -13,15 +17,13 @@ const captureDeviceDetails = (req: Request) => {
   const deviceDetails = {
     ip,
     device,
-    browser:
-      RegExp(/(Firefox|Chrome|Safari|Opera|MSIE|Trident)/i).exec(device)?.[0] || 'Unknown',
+    browser: RegExp(/(Firefox|Chrome|Safari|Opera|MSIE|Trident)/i).exec(device)?.[0] || 'Unknown',
     os: RegExp(/\(([^)]+)\)/).exec(device)?.[1] || 'Unknown',
     timezone,
-    time
+    time,
   };
   return { deviceDetails };
 };
-
 
 export const logResponse = (req: Request) => {
   const { deviceDetails } = captureDeviceDetails(req);
@@ -35,7 +37,7 @@ export const logResponse = (req: Request) => {
   const body = req.body;
   const host = req.hostname;
 
-  const serverIp = req.ip
+  const serverIp = req.ip;
   const serverName = os.hostname();
   const platform = os.platform();
   const serverMemory = os.totalmem();
@@ -66,7 +68,7 @@ export const logResponse = (req: Request) => {
     memory: serverMemory,
     cpuCount,
     ip: serverIp,
-    server_time: new Date()
+    server_time: new Date(),
   };
 
   const logResponse = { server, request, userDetails, createdAt };

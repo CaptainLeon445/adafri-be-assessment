@@ -15,9 +15,9 @@ export class GlobalErrorHandler {
     const appError = err as AppError;
     const stack = appError.stack;
     appError.statusCode = appError.statusCode || 500;
-    appError.message = appError.message || "An unknown error occured";
+    appError.message = appError.message || 'An unknown error occured';
     let error: any = { ...appError };
-    if (isCelebrateError(error)) error=ErrorHandler.handleCelebrateError(error)
+    if (isCelebrateError(error)) error = ErrorHandler.handleCelebrateError(error);
     if (appError.statusCode === 500) error = ErrorHandler.handleInternalServerError();
     if (appError.name === 'SequelizeValidationError')
       error = ErrorHandler.handleValidationError(error);
@@ -48,12 +48,12 @@ export class GlobalErrorHandler {
         // await Logs.create(logDetails);
         logger.error(logDetails);
       } catch (logError) {
-        logger.error(logError)
+        logger.error(logError);
       }
     });
   }
 }
 
-export const getErrorMessage = (next: NextFunction, message:string, statusCode:number) => {
+export const getErrorMessage = (next: NextFunction, message: string, statusCode: number) => {
   return next(new AppError(message, statusCode));
 };

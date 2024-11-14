@@ -4,6 +4,6 @@ import CampaignService from '../services/campaign';
 
 export interface ContainerInstanceTypes {
   campaignController: CampaignController;
-  campaignService: CampaignService
-  accessKeyController: AccessKeyController
+  campaignService: CampaignService;
+  accessKeyController: AccessKeyController;
 }

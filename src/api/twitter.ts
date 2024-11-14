@@ -6,7 +6,7 @@ export const getMetrics = async (campaignId) => {
       headers: {
         Authorization: process.env.TWITTER_TOKEN,
       },
-      params: {campaignId}
+      params: { campaignId },
     })
   ).data;
   return body;

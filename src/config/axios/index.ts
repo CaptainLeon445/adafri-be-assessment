@@ -21,13 +21,12 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log("here")
-    // if (error.response) {
-    //   logger.error('Response Error:', JSON.stringify(error.response.data));
-    //   return Promise.reject(error.response);
-    // }
-    // logger.error('Unknown Error:', error.message);
-    // return Promise.reject(error);
+    if (error.response) {
+      logger.error('Response Error:', JSON.stringify(error.response.data));
+      return Promise.reject(error.response);
+    }
+    logger.error('Unknown Error:', error.message);
+    return Promise.reject(error);
   }
 );
 

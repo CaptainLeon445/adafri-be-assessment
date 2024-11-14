@@ -6,7 +6,6 @@ import { toZonedTime } from 'date-fns-tz';
 import { PaginationObject } from '../types';
 import { AccessAttributes } from '../models/access.models';
 
-
 export const getUserAgentHeader = (req: Request) => req.headers['user-agent'];
 
 export const generateToken = (): string => {
@@ -19,8 +18,8 @@ export const genRandomStr = () => {
 };
 
 const genAccessKeys = (mode: string, role: string) => {
-  return `${process.env.AUTH_BASE_KEY}_${mode}_${role}_${genRandomStr()}`
-}
+  return `${process.env.AUTH_BASE_KEY}_${mode}_${role}_${genRandomStr()}`;
+};
 
 export const getAccessKeysPayload = (): AccessAttributes => {
   return {
@@ -28,8 +27,8 @@ export const getAccessKeysPayload = (): AccessAttributes => {
     live_user_key: genAccessKeys('live', 'usr'),
     test_admin_key: genAccessKeys('test', 'admn'),
     test_user_key: genAccessKeys('test', 'usr'),
-  }
-}
+  };
+};
 
 export const pagination = (req: Request): PaginationObject => {
   const { offset = 1, limit = 50 } = req.query;

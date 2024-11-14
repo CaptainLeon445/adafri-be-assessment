@@ -102,6 +102,8 @@ Linting is done using ESLint. Check for linting issues using:
    make lint
 
    ```
+   * chmod +x .husky/pre-commit
+   * husky is a git hook used for linting the codes before commit
 
 ## Documentation
 
@@ -113,5 +115,5 @@ Linting is done using ESLint. Check for linting issues using:
 - Facebook campaign ad api permission unavailable due to pending developer business account status
 
 ## Conclusion
-This document summarizes the implementation of the Adafri campaign ad backend assessment demo. The use of Docker, Makefile, PostgreSQL, Sequelize, TypeScript,  ESLint, ensures a robust, scalable, and maintainable codebase. The design decisions and technology choices were influenced by the constraints of the hosting platform and the need for type safety, code quality, and developer productivity.
+This document summarizes the implementation of the Adafri campaign ad backend assessment demo. The use of Docker,husky, Makefile, PostgreSQL, Sequelize, TypeScript,  ESLint, ensures a robust, scalable, and maintainable codebase. The design decisions and technology choices were influenced by the constraints of the hosting platform and the need for type safety, code quality, and developer productivity.
 

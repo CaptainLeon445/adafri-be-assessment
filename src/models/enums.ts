@@ -1,9 +1,6 @@
 export enum CampaignStatus {
-    ACTIVE = "ACTIVE",
-    PAUSED = "PAUSED",
-    DELETED = "DELETED",
-    ARCHIVED = "ARCHIVED",
-  }
-
-
-  
+  ACTIVE = 'ACTIVE',
+  PAUSED = 'PAUSED',
+  DELETED = 'DELETED',
+  ARCHIVED = 'ARCHIVED',
+}
