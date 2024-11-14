@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
   // eslint-disable-next-line no-console
   console.log('using environment variables from server environment');
@@ -24,12 +24,9 @@ import { indexRoutes } from './routes/index.routes';
 import { errors } from 'celebrate';
 import { isProductionEnv } from './utilities/guards';
 
-
 console.log('============WELCOME!!!====================');
 console.log(`App server is in ${process.env.NODE_ENV} mode`);
 console.log('==========================================');
-
-
 
 app.use(helmet());
 
@@ -39,8 +36,6 @@ if (isProductionEnv) {
 }
 
 app.use(express.json());
-
-
 
 app.use((req, res, next) => {
   res.locals.xss = xss;
@@ -66,10 +61,9 @@ app.get('/', (req, res) => {
 
 indexRoutes(app);
 
-
 app.use(async (err: Error, req: Request, res: Response, next: NextFunction) => {
   await GlobalErrorHandler.handleError(err, req, res, next);
 });
-app.use(errors())
+app.use(errors());
 
 export default app;
