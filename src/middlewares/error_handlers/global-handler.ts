@@ -17,7 +17,6 @@ export class GlobalErrorHandler {
     appError.statusCode = appError.statusCode || 500;
     appError.message = appError.message || "An unknown error occured";
     let error: any = { ...appError };
-    console.log(error)
     if (isCelebrateError(error)) error=ErrorHandler.handleCelebrateError(error)
     if (appError.statusCode === 500) error = ErrorHandler.handleInternalServerError();
     if (appError.name === 'SequelizeValidationError')

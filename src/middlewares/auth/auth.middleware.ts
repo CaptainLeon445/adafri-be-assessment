@@ -11,13 +11,13 @@ declare module 'express' {
   }
 }
 
-export const authProtect = (req: Request,res:Response, next: NextFunction) => {
+export const authProtect = (req: Request, res: Response, next: NextFunction) => {
   const modes: string[] = ['live', 'test']
   const user: string[] = ['admn', 'usr']
   const accessKey: string = req.headers['x-api-access-key'] as string;
   if (!accessKey)
     return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
-  if (accessKey.split(' ').length > 0)
+  if (accessKey.split(' ').length > 1)
     return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
   if (accessKey.split('_').length < 2) return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
   if (accessKey.split('_')[0].toLocaleLowerCase() !== process.env.AUTH_BASE_KEY)
@@ -29,11 +29,11 @@ export const authProtect = (req: Request,res:Response, next: NextFunction) => {
   if (accessKey.split('_')[2] === 'usr') role = ROLES.user
   req.user = { accessKey, role }
   next()
-}
+} 
 
 
 export const authRestrictTo = (roles: string[]) => {
-  return async (req: Request,res:Response, next: NextFunction) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user.role))
       return getErrorMessage(next, AuthErrors.NO_PERMISSION, StatusCodes.FORBIDDEN);
     next();

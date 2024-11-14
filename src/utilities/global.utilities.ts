@@ -27,7 +27,7 @@ export const getAccessKeysPayload = (): AccessAttributes => {
     live_admin_key: genAccessKeys('live', 'admn'),
     live_user_key: genAccessKeys('live', 'usr'),
     test_admin_key: genAccessKeys('test', 'admn'),
-    test_user_key: genAccessKeys('live', 'usr'),
+    test_user_key: genAccessKeys('test', 'usr'),
   }
 }
 
