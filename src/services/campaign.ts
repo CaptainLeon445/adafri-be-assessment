@@ -11,7 +11,7 @@ export default class CampaignService {
 
     public getCampaigns = (async (paginate: PaginationObject) => {
         try {
-            const responseData = await Campaign.findAndCountAll({ where: { ...paginate } });
+            const responseData = await Campaign.findAndCountAll({ ...paginate });
             const { rows, count } = responseData
             const data = { count, data: rows }
             return data
@@ -43,8 +43,8 @@ export default class CampaignService {
         try {
             const campaign = await Campaign.findByPk(campaignId)
             if (!campaign) return getErrorMessage(next, CampaignErrors.NOT_FOUND, StatusCodes.NOT_FOUND)
-            const metrics = await getMetrics(campaignId)
-            const data = { campaign, metrics }
+            // const metrics = await getMetrics(campaignId)
+            const data = { campaign, metrics: "checked" }
             return data
         } catch (error) {
 

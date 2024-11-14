@@ -21,6 +21,7 @@ import compression from 'compression';
 // import { RateLimiterController } from './middlewares/rate_limiter/rate-limiter.middleware';
 import { GlobalErrorHandler } from './middlewares/error_handlers/global-handler';
 import { indexRoutes } from './routes/index.routes';
+import { errors } from 'celebrate';
 
 
 console.log('============WELCOME!!!====================');
@@ -58,7 +59,7 @@ app.use((req: Request, res: Response, next) => {
   next();
 });
 
-app.get('/api-docs', (req, res) => {
+app.get('/', (req, res) => {
   res.redirect(process.env.API_DOCS);
 });
 
@@ -68,5 +69,6 @@ indexRoutes(app);
 app.use(async (err: Error, req: Request, res: Response, next: NextFunction) => {
   await GlobalErrorHandler.handleError(err, req, res, next);
 });
+app.use(errors())
 
 export default app;

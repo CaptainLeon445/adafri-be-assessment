@@ -105,7 +105,7 @@ Linting is done using ESLint. Check for linting issues using:
 
 ## Documentation
 
-  * The API documentation is available on [Adafri-test-API-endpoints](https://adafri-be-assessment.onrender.com/api-docs/)
+  * The API documentation is available on [Adafri-test-API-endpoints](https://adafri-be-assessment.onrender.com/)
 
 
 ## Important Notification

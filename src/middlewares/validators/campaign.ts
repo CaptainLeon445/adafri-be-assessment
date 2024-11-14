@@ -37,9 +37,10 @@ export const createCampaignValidator = (req: Request, res: Response, next: NextF
 };
 
 export const idParamvalidator = (req: Request, res: Response, next: NextFunction) => {
-    return celebrate({
+    celebrate({
         [Segments.PARAMS]: {
             id: Joi.string().token().required()
         }
     })
+    next()
 };
