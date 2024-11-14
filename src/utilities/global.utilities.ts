@@ -19,7 +19,7 @@ export const genRandomStr = () => {
 };
 
 const genAccessKeys = (mode: string, role: string) => {
-  return `${process.env.AUTH_BASE_KEY}_${mode}_${role}_${genRandomStr}`
+  return `${process.env.AUTH_BASE_KEY}_${mode}_${role}_${genRandomStr()}`
 }
 
 export const getAccessKeysPayload = (): AccessAttributes => {

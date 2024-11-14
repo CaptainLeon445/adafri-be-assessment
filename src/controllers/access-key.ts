@@ -19,15 +19,18 @@ export default class AccessKeyController {
     });
 
     public createAccessKeys = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-        const data = await Access.findAll()
+        const data = await Access.findOne({ where: { id: 1 } })
         let responseData: ResponseObject = { statusCode: StatusCodes.OK, message: "Authorization keys returned successully", data }
-        if (data.length > 0) responseData.data = data
-        const payload: AccessAttributes = getAccessKeysPayload()
-        const response = await Access.create(payload)
-        if (response) {
-            responseData.statusCode = StatusCodes.CREATED
-            responseData.message = "Authorization keys created sucessfully"
+        if (!data) {
+            const payload: AccessAttributes = getAccessKeysPayload()
+            const response = await Access.create(payload)
+            if (response) {
+                responseData.statusCode = StatusCodes.CREATED
+                responseData.message = "Authorization keys created sucessfully"
+                responseData.data = response
+            }
         }
+
         return sendResponse(res, responseData)
     });
 
