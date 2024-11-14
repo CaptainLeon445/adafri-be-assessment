@@ -58,8 +58,8 @@ Before you begin, ensure you have met the following requirements:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/CaptainLeon445/credit-wallet-demo-.git
-   cd credit-wallet-demo-
+   git clone https://github.com/CaptainLeon445/adafri-be-assessment.git
+   cd adafri-be-assessment
 
    ```
 2. Install dependencies
@@ -110,10 +110,8 @@ Linting is done using ESLint. Check for linting issues using:
 
 ## Important Notification
 
-- Lendsqr Adjutor Karma blacklist is not found in the Lendsqr documentation
-- Render hosting platform does not provide free MySql database. PostgreSQL database is used.
-- Docker is used to build images for deployment on render hosting platform.
+- Facebook campaign ad api permission unavailable due to pending developer business account status
 
 ## Conclusion
-This document summarizes the implementation of the Adafri campaign ad backend assessment demo. The use of Docker, Makefile, PostgreSQL, Sequelize, TypeScript, Jest, ESLint, JWT, and bcrypt ensures a robust, scalable, and maintainable codebase. The design decisions and technology choices were influenced by the constraints of the hosting platform and the need for type safety, code quality, and developer productivity.
+This document summarizes the implementation of the Adafri campaign ad backend assessment demo. The use of Docker, Makefile, PostgreSQL, Sequelize, TypeScript,  ESLint, ensures a robust, scalable, and maintainable codebase. The design decisions and technology choices were influenced by the constraints of the hosting platform and the need for type safety, code quality, and developer productivity.
 
