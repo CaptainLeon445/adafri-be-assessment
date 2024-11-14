@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === 'production') {
   console.log(process.env.NODE_ENV);
   dotenv.config({ path: `${process.env.NODE_ENV}.env`, debug: true });
 }
+
 import express, { Application, NextFunction, Request, Response } from 'express';
 const app: Application = express();
 
