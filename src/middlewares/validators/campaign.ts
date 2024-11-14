@@ -19,11 +19,11 @@ export const createCampaignValidator = (req: Request, res: Response, next: NextF
                 'number.precision': 'Campaign budget must have at most 2 decimal places.',
                 'any.required': 'Campaign budget is required.',
             }),
-            startDate: Joi.date().required().messages({
+            startDate: Joi.date().optional().messages({
                 'date.base': 'campaign start date must be a date',
                 'any.required': 'campaign start date is required',
             }),
-            endDate: Joi.date().required().messages({
+            endDate: Joi.date().optional().messages({
                 'date.base': 'campaign end date must be a date',
                 'any.required': 'campaign end date is required',
             }),

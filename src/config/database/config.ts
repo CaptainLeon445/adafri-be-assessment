@@ -31,7 +31,7 @@ export const config = dbConfig[env];
 const sequelizeOptions: SequelizeConfig = {
   logging: false,
   dialect: 'postgres',
-  sync: { alter: false },
+  sync: { alter: true },
   define: {
     underscored: true,
     freezeTableName: false,

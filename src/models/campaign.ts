@@ -2,14 +2,14 @@ import sequelize from '../config/database/connection';
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface CampaignAttributes {
-  id: string;
+  id?: string;
   title: string;
   budget: number;
   startDate: Date;
   endDate: Date;
   status: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 class Campaign extends Model<CampaignAttributes> implements CampaignAttributes {
@@ -42,11 +42,9 @@ Campaign.init(
     },
     endDate: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
     startDate: {
       type: DataTypes.DATE,
-      allowNull: false,
     },
     status: {
       type: DataTypes.STRING,

@@ -15,6 +15,7 @@ export const sendResponse = async (res: Response, data: ResponseObject) => {
       ...data.data,
     },
   };
+  console.log(logDetails)
   await Logs.create(logDetails);
   let status: string = data.statusCode >= 200 && data.statusCode < 400 ? 'success' : 'fail'
   if (data.statusCode === 204) res.status(204).send();

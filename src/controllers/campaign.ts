@@ -6,6 +6,7 @@ import { PaginationObject, ResponseObject } from "../types";
 import { StatusCodes } from "http-status-codes";
 import { pagination } from "../utilities/global.utilities";
 import { CampaignMessages } from "../constants/responses.constants";
+import { createCampaign } from "../api/facebook";
 
 
 export default class CampaignController {
@@ -20,6 +21,8 @@ export default class CampaignController {
     public createCampaign = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const requestPayload = req.body
         const data = await this.campaignService.createCampaign(requestPayload)
+        const apiRes=await createCampaign(requestPayload)
+        console.log(apiRes) 
         const responseData:ResponseObject={statusCode:StatusCodes.CREATED, message: CampaignMessages.CAMPAIGN_CREATED, data}
         return sendResponse(res, responseData)
     });

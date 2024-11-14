@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
   // eslint-disable-next-line no-console
   console.log('using environment variables from server environment');
@@ -11,7 +12,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 import express, { Application, NextFunction, Request, Response } from 'express';
 const app: Application = express();
-
 
 import morgan from 'morgan';
 import xss from 'xss';

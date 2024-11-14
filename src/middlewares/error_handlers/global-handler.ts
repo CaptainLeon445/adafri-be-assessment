@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from './app-error';
 import { ErrorHandler } from '../../utilities/error-handler.utilities';
-import { ERROR } from '../../constants/errors.constants';
 import logger from '../../utilities/logger';
 import { isCelebrateError } from 'celebrate';
 
@@ -16,8 +15,9 @@ export class GlobalErrorHandler {
     const appError = err as AppError;
     const stack = appError.stack;
     appError.statusCode = appError.statusCode || 500;
-    appError.message = appError.message || ERROR.serverError[0];
+    appError.message = appError.message || "An unknown error occured";
     let error: any = { ...appError };
+    console.log(error)
     if (isCelebrateError(error)) error=ErrorHandler.handleCelebrateError(error)
     if (appError.statusCode === 500) error = ErrorHandler.handleInternalServerError();
     if (appError.name === 'SequelizeValidationError')

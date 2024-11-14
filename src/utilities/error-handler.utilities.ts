@@ -1,6 +1,5 @@
 import { Response } from 'express';
 import { AppError } from '../middlewares/error_handlers/app-error';
-import { ERROR } from '../constants/errors.constants';
 import { StatusCodes } from 'http-status-codes';
 
 export class ErrorHandler {
@@ -38,8 +37,7 @@ export class ErrorHandler {
     return new AppError(error, 400);
   }
   public static handleInternalServerError() {
-    const error: [string, number] = ERROR.serverError;
-    return new AppError(error[0], error[1]);
+    return new AppError("An unknown error occured", StatusCodes.INTERNAL_SERVER_ERROR);
   }
 
   public static async handleFoError(err: any) {
@@ -59,12 +57,5 @@ export class ErrorHandler {
 
   public static async handleTokenExpiredError() {
     return new AppError('Token Expired', 401);
-  }
-  public static async RateLimitExceeded(err: any, res: Response) {
-    const remainingAttempt = err.retryAfter;
-    return res.status(ERROR.rateLimitExceeded[1]).json({
-      message: ERROR.rateLimitExceeded[0],
-      remainingAttempt,
-    });
   }
 }
