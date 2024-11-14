@@ -1,16 +1,43 @@
 import { NextFunction, Request, Response } from 'express';
+import { getErrorMessage } from '../error_handlers/global-handler';
+import { AuthErrors } from '../../constants/errors.constants';
+import { StatusCodes } from 'http-status-codes';
+import { ROLES } from '../../constants/values.constants';
 
 
 declare module 'express' {
   interface Request {
     user: any;
-    userTokenId: string;
   }
 }
 
-export class AuthMiddleware {
-  public async authProtect(req: Request, res: Response, next: NextFunction) {
-    next()
-  }
+export const authProtect = (req: Request,res:Response, next: NextFunction) => {
+  const modes: string[] = ['live', 'test']
+  const user: string[] = ['admn', 'usr']
+  const accessKey: string = req.headers['x-api-access-key'] as string;
+  if (!accessKey)
+    return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  if (accessKey.split(' ').length > 0)
+    return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  if (accessKey.split('_').length < 2) return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  if (accessKey.split('_')[0].toLocaleLowerCase() !== process.env.AUTH_BASE_KEY)
+    return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  if (!modes.includes(accessKey.split('_')[1])) return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  if (!user.includes(accessKey.split('_')[2])) return getErrorMessage(next, AuthErrors.NOT_AUTHORIZED, StatusCodes.UNAUTHORIZED);
+  let role: string
+  if (accessKey.split('_')[2] === 'admn') role = ROLES.admin
+  if (accessKey.split('_')[2] === 'usr') role = ROLES.user
+  req.user = { accessKey, role }
+  next()
 }
+
+
+export const authRestrictTo = (roles: string[]) => {
+  return async (req: Request,res:Response, next: NextFunction) => {
+    if (!roles.includes(req.user.role))
+      return getErrorMessage(next, AuthErrors.NO_PERMISSION, StatusCodes.FORBIDDEN);
+    next();
+  };
+}
+
 

@@ -1,9 +1,10 @@
-import {  Request } from 'express';
+import { Request } from 'express';
 import RequestIP from 'request-ip';
 import { v4 as uuidv4 } from 'uuid';
 import geoip from 'geoip-lite';
 import { toZonedTime } from 'date-fns-tz';
 import { PaginationObject } from '../types';
+import { AccessAttributes } from '../models/access.models';
 
 
 export const getUserAgentHeader = (req: Request) => req.headers['user-agent'];
@@ -16,6 +17,19 @@ export const genRandomStr = () => {
   const randomStr = uuidv4().slice(0, 12).split('-').join('');
   return randomStr;
 };
+
+const genAccessKeys = (mode: string, role: string) => {
+  return `${process.env.AUTH_BASE_KEY}_${mode}_${role}_${genRandomStr}`
+}
+
+export const getAccessKeysPayload = (): AccessAttributes => {
+  return {
+    live_admin_key: genAccessKeys('live', 'admn'),
+    live_user_key: genAccessKeys('live', 'usr'),
+    test_admin_key: genAccessKeys('test', 'admn'),
+    test_user_key: genAccessKeys('live', 'usr'),
+  }
+}
 
 export const pagination = (req: Request): PaginationObject => {
   const { offset = 1, limit = 50 } = req.query;

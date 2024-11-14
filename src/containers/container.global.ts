@@ -2,6 +2,7 @@ import { ContainerKeys } from './container.types';
 import { ContainerInstanceTypes } from './container.interfaces';
 import CampaignController from '../controllers/campaign';
 import CampaignService from '../services/campaign';
+import AccessKeyController from '../controllers/access-key';
 
 
 class Container {
@@ -18,5 +19,6 @@ class Container {
 
 const container = new Container();
 container.register("campaignService", new CampaignService())
+container.register("accessKeyController", new AccessKeyController())
 container.register("campaignController", new CampaignController(container.resolve('campaignService')))
 export default container;
