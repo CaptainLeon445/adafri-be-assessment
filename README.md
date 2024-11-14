@@ -78,7 +78,7 @@ Before you begin, ensure you have met the following requirements:
 
 2. Open Browser or Postman
 
-- Open your browser to [http://127.0.0.1:3000](http://127.0.0.1:3000)
+- Open your browser to localhost [http://127.0.0.1:3000](http://127.0.0.1:3000)
 - Invoke the `/api/v1/health` endpoint
 
 ```shell
@@ -105,7 +105,7 @@ Linting is done using ESLint. Check for linting issues using:
 
 ## Documentation
 
-  * The API documentation is available on [Adafri-test-API-endpoints](https://christopher-ifeoluwa-oni-lendsqr-be-test.onrender.com/api-docs/)
+  * The API documentation is available on [Adafri-test-API-endpoints](https://adafri-be-assessment.onrender.com/api-docs/)
 
 
 ## Important Notification

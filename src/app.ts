@@ -21,7 +21,7 @@ import compression from 'compression';
 // import { RateLimiterController } from './middlewares/rate_limiter/rate-limiter.middleware';
 import { GlobalErrorHandler } from './middlewares/error_handlers/global-handler';
 import { indexRoutes } from './routes/index.routes';
-import { isProductionEnv, isTestENV } from './utilities/guards';
+
 
 console.log('============WELCOME!!!====================');
 console.log(`App server is in ${process.env.NODE_ENV} mode`);
