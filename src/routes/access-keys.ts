@@ -6,7 +6,7 @@ const accessKeyRouter = express.Router();
 const accessKeyController = container.resolve('accessKeyController');
 
 accessKeyRouter.get("/", accessKeyController.getAccessKeys.bind(accessKeyController))
-accessKeyRouter.post("/create", accessKeyController.createAccessKeys.bind(accessKeyController))
+accessKeyRouter.post("/", accessKeyController.createAccessKeys.bind(accessKeyController))
 accessKeyRouter.post("/reset", accessKeyController.resetAccessKeys.bind(accessKeyController))
 
 
