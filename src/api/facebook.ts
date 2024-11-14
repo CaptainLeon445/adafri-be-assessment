@@ -1,17 +1,15 @@
 import axios from '../config/axios';
 
-const FB_API_URL = 'https://graph.facebook.com/v21.0';
-const { FB_ACCESS_TOKEN, FB_AD_ACCOUNT_ID } = process.env;
+const { FB_ACCESS_TOKEN, FB_AD_ACCOUNT_ID, FACEBOOK_BASE_URL } = process.env;
 
 const headers = {
     access_token: FB_ACCESS_TOKEN,
 };
-console.log(FB_ACCESS_TOKEN, FB_AD_ACCOUNT_ID, headers)
 
 export const getCampaigns = async () => {
     const body = (
         await axios.get(
-            `${FB_API_URL}/${FB_AD_ACCOUNT_ID}/campaigns`,
+            `${FACEBOOK_BASE_URL}/${FB_AD_ACCOUNT_ID}/campaigns`,
             { headers }
         )
     ).data;
@@ -21,7 +19,7 @@ export const getCampaigns = async () => {
 export const createCampaign = async (campaignData) => {
     const body = (
         await axios.post(
-            `${FB_API_URL}/${FB_AD_ACCOUNT_ID}/campaigns`,
+            `${FACEBOOK_BASE_URL}/${FB_AD_ACCOUNT_ID}/campaigns`,
             {
                 name: campaignData.title,
                 status: campaignData.status || 'PAUSED',
@@ -37,7 +35,7 @@ export const createCampaign = async (campaignData) => {
 export const getCampaignInsights = async (campaignId) => {
     const body = (
         await axios.get(
-            `${FB_API_URL}/${campaignId}/insights`,
+            `${FACEBOOK_BASE_URL}/${campaignId}/insights`,
             { headers }
         )
     ).data;
